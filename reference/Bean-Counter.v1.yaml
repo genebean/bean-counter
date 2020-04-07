@@ -1,0 +1,190 @@
+openapi: 3.0.0
+info:
+  title: Bean Counter
+  version: '1.0'
+  contact:
+    name: Gene Liverman
+    email: gene@technicalissues.us
+  description: An API for interacting with statistics for my projects
+servers:
+  - url: 'http://localhost:3000'
+paths:
+  /pwr/stats:
+    get:
+      summary: Get stats about PiWeather Rock
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PWR-Public-Stats'
+      operationId: get-pwr-stats
+      description: Get a JSON object with statistical information about the users of PiWeatherRock
+    post:
+      summary: Submit stats
+      operationId: post-pwr-stats
+      responses:
+        '200':
+          description: OK
+      description: Submit statistical information
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PWR-Device'
+  /pwr/version:
+    get:
+      summary: Get the current version of PiWeatherRock
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  version:
+                    type: string
+      operationId: get-pwr-version
+      description: Returns the current version of PiWeatherRock
+components:
+  schemas:
+    PWR-Device:
+      title: PWR-User
+      type: object
+      description: ''
+      x-examples: {}
+      properties:
+        cpuinfo:
+          type: object
+          description: Information about the processor
+          properties:
+            hardware:
+              type: string
+              example: BCM2835
+            revision:
+              type: string
+              example: b03111
+            model:
+              type: string
+              example: Raspberry Pi 4 Model B Rev 1.1
+        uuid:
+          type: string
+          description: sha256 checksum unique to each machine
+        history:
+          type: object
+          description: ''
+          properties:
+            version:
+              type: object
+              properties:
+                initial:
+                  type: string
+                  description: The first observed version of PiWeatherRock
+                current:
+                  type: string
+                  description: The currently running version of PiWeatherRock
+              required:
+                - current
+            checkins:
+              type: object
+              properties:
+                initial:
+                  type: string
+                  format: date-time
+                  description: The first observed checking
+                current:
+                  type: string
+                  format: date-time
+                  description: The current date and time
+              required:
+                - current
+        location:
+          type: object
+          description: The location information sent to the weather provider
+          properties:
+            lat:
+              type: number
+            lon:
+              type: number
+        os:
+          type: object
+          description: OS information as represented by facter
+          properties:
+            architecture:
+              type: string
+            distro:
+              type: object
+              properties:
+                codename:
+                  type: string
+                description:
+                  type: string
+                id:
+                  type: string
+            family:
+              type: string
+            hardware:
+              type: string
+            name:
+              type: string
+            release:
+              type: object
+              properties:
+                full:
+                  type: string
+                major:
+                  type: string
+                minor:
+                  type: string
+        plugins:
+          type: array
+          description: The PiWeatherRock plugins configured for use
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+              enabled:
+                type: boolean
+        units:
+          type: string
+          description: The units weather data is returned in
+        lang:
+          type: string
+          description: The language weather results are returned in
+        framebuffer:
+          type: string
+          description: The frambuffer size used by pygame
+          example: 800 x 480
+          pattern: "^\\d+\\sx\\s\\d+$"
+      required:
+        - uuid
+        - plugins
+        - framebuffer
+    PWR-Public-Stats:
+      title: PWR-Public-Stats
+      type: object
+      description: Statistical information about the useage of PiWeatherRock
+      properties:
+        devices:
+          type: integer
+          description: The number of unique devices within the last week
+        countries:
+          type: array
+          description: An array of countries for which people are requesting weather data
+          items:
+            type: string
+        breakdown:
+          type: array
+          description: Usage broken down by country
+          items:
+            type: object
+            properties:
+              country:
+                type: string
+              devices:
+                type: integer
