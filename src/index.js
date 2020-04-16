@@ -1,8 +1,9 @@
-// get dependencies
 require('dotenv').config();
+const port = process.env.PORT || 3000;
 
 const express = require('express');
 const bodyParser = require('body-parser');
+
 const promPrefix = 'bean_counter_';
 const promBundle = require("express-prom-bundle");
 const metricsMiddleware = promBundle({
@@ -17,10 +18,15 @@ const metricsMiddleware = promBundle({
 
 const swaggerUi = require('swagger-ui-express');
 const YAML = require('yamljs');
-const swaggerDocument = YAML.load('./reference/Bean-Counter.v1.yaml');
+const swaggerDocument = YAML.load('../reference/Bean-Counter.v1.yaml');
+
+const { connector } = require('swagger-routes-express')
+const api = require('./api')
+
+const connect = connector(api, swaggerDocument)
 
 const app = express();
-const port = process.env.PORT || 3000;
+connect(app)
 
 // register Prometheus metrics collection for all routes
 // ... except those starting with /api-docs
@@ -34,7 +40,7 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 // default route
 app.get('/', (req, res) => {
-    res.json({"message": "Welcome to ZeptoBook Product app"});
+    res.redirect('/ping')
 });
 
 // listen on port 3000 by default
