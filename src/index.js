@@ -18,7 +18,8 @@ const metricsMiddleware = promBundle({
 
 const swaggerUi = require('swagger-ui-express');
 const YAML = require('yamljs');
-const swaggerDocument = YAML.load('../reference/Bean-Counter.v1.yaml');
+// we need to run this from the point of view of where npm is running
+const swaggerDocument = YAML.load('reference/Bean-Counter.v1.yaml');
 
 const app = express();
 const api = require('./api')
@@ -36,7 +37,7 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 // default route
 app.get('/', (req, res) => {
-    res.redirect('/api/ping')
+  res.redirect('/api/ping')
 });
 
 // listen on port 3000 by default
