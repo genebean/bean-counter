@@ -9,7 +9,7 @@ info:
 servers:
   - url: 'http://localhost:3000'
 paths:
-  /v1/pwr/stats:
+  /api/v1/pwr/stats:
     get:
       summary: Get stats about PiWeather Rock
       tags: []
@@ -35,7 +35,7 @@ paths:
             schema:
               $ref: '#/components/schemas/PWR-Device'
     parameters: []
-  /v1/pwr/version:
+  /api/v1/pwr/version:
     get:
       summary: Get the current version of PiWeatherRock
       tags: []
@@ -52,11 +52,9 @@ paths:
       operationId: get-pwr-version
       description: Returns the current version of PiWeatherRock
     parameters: []
-  /ping:
+  /api/ping:
     get:
       summary: Your GET endpoint
-      tags:
-        - root
       responses:
         '200':
           description: OK
@@ -66,6 +64,7 @@ paths:
                 $ref: '#/components/schemas/ServerInfo'
       operationId: ping
       description: Returns info about the running application
+    parameters: []
 components:
   schemas:
     PWR-Device:

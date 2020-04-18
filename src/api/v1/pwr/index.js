@@ -1,2 +1,8 @@
+var express = require('express')
+var router = express.Router()
+
 const stats = require('./stats')
-module.exports = { stats }
+
+router.get('/stats', stats)
+
+module.exports = router

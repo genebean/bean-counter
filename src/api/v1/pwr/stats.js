@@ -1,13 +1,18 @@
 const stats = (req, res) => {
   res.json({
-    "devices": 0,
+    "devices": 2,
     "countries": [
-      "string"
+      "Germany",
+      "United States of America"
     ],
     "breakdown": [
       {
-        "country": "string",
-        "devices": 0
+        "country": "Gernamny",
+        "devices": 1
+      },
+      {
+        "country": "United States of America",
+        "devices": 1
       }
     ]
   })

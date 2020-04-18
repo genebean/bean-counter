@@ -20,13 +20,8 @@ const swaggerUi = require('swagger-ui-express');
 const YAML = require('yamljs');
 const swaggerDocument = YAML.load('../reference/Bean-Counter.v1.yaml');
 
-const { connector } = require('swagger-routes-express')
-const api = require('./api')
-
-const connect = connector(api, swaggerDocument)
-
 const app = express();
-connect(app)
+const api = require('./api')
 
 // register Prometheus metrics collection for all routes
 // ... except those starting with /api-docs
@@ -36,14 +31,15 @@ app.use("/((?!api-docs))*", metricsMiddleware);
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 
+app.use('/api', api)
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 // default route
 app.get('/', (req, res) => {
-    res.redirect('/ping')
+    res.redirect('/api/ping')
 });
 
 // listen on port 3000 by default
 app.listen(port, () => {
-    console.log(`Server is listening on port ${port}`);
+  console.log(`Server is listening on port ${port}`);
 });
