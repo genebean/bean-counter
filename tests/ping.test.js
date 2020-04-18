@@ -35,6 +35,7 @@ describe('Ping unit test', () => {
             chai.expect(returnData).to.have.property('version')
             chai.expect(returnData.version).to.be.a('string')
             chai.expect(returnData.version).to.not.equal('')
+            chai.expect(returnData.version).to.match(/^\d+\.\d+\.\d+$/)
         })
 
         it('returns a valid uptime', () => {
