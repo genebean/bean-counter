@@ -1,11 +1,14 @@
+/* eslint-disable-next-line import/no-extraneous-dependencies */
 require('dotenv').config()
+
 const port = process.env.PORT || 3000
 
 const express = require('express')
 const bodyParser = require('body-parser')
 
 const promPrefix = 'bean_counter_'
-const promBundle = require("express-prom-bundle")
+const promBundle = require('express-prom-bundle')
+
 const metricsMiddleware = promBundle({
   includeMethod: true,
   includePath: true,
@@ -26,7 +29,7 @@ const api = require('./api')
 
 // register Prometheus metrics collection for all routes
 // ... except those starting with /api-docs
-app.use("/((?!api-docs))*", metricsMiddleware)
+app.use('/((?!api-docs))*', metricsMiddleware)
 
 // parse requests
 app.use(bodyParser.urlencoded({ extended: false }))
@@ -42,5 +45,6 @@ app.get('/', (req, res) => {
 
 // listen on port 3000 by default
 app.listen(port, () => {
+  /* eslint-disable-next-line no-console */
   console.log(`Server is listening on port ${port}`)
 });
