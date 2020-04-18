@@ -21,3 +21,5 @@
   - this ensures testing is not failing and linting is happening all of the time
 - the `.eslintrc` file is where we control linting of the project
   - use the `rules` array to turn rules off when they don't fit the project
+- if it's just one instance of a rule being broken you can use the following comment to disable the rule:
+  - `/* eslint-disable-next-line ${rule_name} */`
