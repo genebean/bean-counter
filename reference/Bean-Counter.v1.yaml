@@ -104,13 +104,13 @@ components:
                   description: The currently running version of PiWeatherRock
               required:
                 - current
-            checkins:
+            check-ins:
               type: object
               properties:
                 initial:
                   type: string
                   format: date-time
-                  description: The first observed checking
+                  description: The first observed check-in
                 current:
                   type: string
                   format: date-time
@@ -127,7 +127,7 @@ components:
               type: number
         os:
           type: object
-          description: OS information as represented by facter
+          description: OS information as represented by Facter
           properties:
             architecture:
               type: string
@@ -173,7 +173,7 @@ components:
           description: The language weather results are returned in
         framebuffer:
           type: string
-          description: The frambuffer size used by pygame
+          description: The framebuffer size used by pygame
           example: 800 x 480
           pattern: "^\\d+\\sx\\s\\d+$"
       required:
@@ -183,7 +183,7 @@ components:
     PWR-Public-Stats:
       title: PWR-Public-Stats
       type: object
-      description: Statistical information about the useage of PiWeatherRock
+      description: Statistical information about the usage of PiWeatherRock
       properties:
         devices:
           type: integer
