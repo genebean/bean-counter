@@ -9,7 +9,7 @@
   "main": "src/index.js",
   "scripts": {
     "lint": "eslint . --ext .js --fix",
-    "test": "mocha --exit ./tests/*test.js",
+    "test": "nyc mocha --exit ./tests/*test.js",
     "start": "node src/index.js",
     "start:dev": "nodemon src/index.js"
   },
