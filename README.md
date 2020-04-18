@@ -15,3 +15,4 @@
   - these packages will not be built with server, just used for local development
 - `npm i -S ${package}` will install the package as a normal dependency
   - these are packages you want to be built and sent along with the server
+- husky now runs `npm run lint && npm run test` on every push to ensure testing is not failing and linting is happening
