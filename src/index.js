@@ -4,7 +4,7 @@ require('dotenv').config()
 const port = process.env.PORT || 3000
 
 const express = require('express')
-const { OpenApiValidator } = require("express-openapi-validate")
+const { OpenApiValidator } = require('express-openapi-validate')
 
 const promPrefix = 'bean_counter_'
 const promBundle = require('express-prom-bundle')
@@ -21,6 +21,7 @@ const metricsMiddleware = promBundle({
 
 const swaggerUi = require('swagger-ui-express')
 const YAML = require('yamljs')
+
 const openApiDocument = YAML.load('reference/Bean-Counter.v1.yaml')
 const validator = new OpenApiValidator(openApiDocument)
 
