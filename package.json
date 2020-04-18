@@ -8,7 +8,9 @@
   },
   "main": "src/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node src/index.js",
+    "start:dev": "nodemon src/index.js"
   },
   "author": "genebean",
   "license": "MIT",
@@ -20,5 +22,8 @@
     "prom-client": "^12.0.0",
     "swagger-ui-express": "^4.1.4",
     "yamljs": "^0.3.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.3"
   }
 }
