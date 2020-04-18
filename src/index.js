@@ -4,7 +4,7 @@ require('dotenv').config()
 const port = process.env.PORT || 3000
 
 const express = require('express')
-const bodyParser = require('body-parser')
+const { OpenApiValidator } = require("express-openapi-validate")
 
 const promPrefix = 'bean_counter_'
 const promBundle = require('express-prom-bundle')
@@ -21,8 +21,8 @@ const metricsMiddleware = promBundle({
 
 const swaggerUi = require('swagger-ui-express')
 const YAML = require('yamljs')
-// we need to run this from the point of view of where npm is running
-const swaggerDocument = YAML.load('reference/Bean-Counter.v1.yaml')
+const openApiDocument = YAML.load('reference/Bean-Counter.v1.yaml')
+const validator = new OpenApiValidator(openApiDocument)
 
 const app = express()
 const api = require('./api')
@@ -31,12 +31,15 @@ const api = require('./api')
 // ... except those starting with /api-docs
 app.use('/((?!api-docs))*', metricsMiddleware)
 
+// Apply validator to all requests
+app.use(validator.match());
+
 // parse requests
-app.use(bodyParser.urlencoded({ extended: false }))
-app.use(bodyParser.json())
+app.use(express.urlencoded({ extended: false }))
+app.use(express.json())
 
 app.use('/api', api)
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument))
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(openApiDocument))
 
 // default route
 app.get('/', (req, res) => {
