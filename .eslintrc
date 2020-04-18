@@ -1,0 +1,23 @@
+{
+  "extends": [
+    "airbnb",
+    "prettier",
+  ],
+  "env": {
+    "mocha": true
+  },
+  "rules": {
+    "quotes": [
+      2,
+      "single",
+      "avoid-escape"
+    ],
+    "no-process-env": "off",
+    "max-len": [
+      "error",
+      {
+        "code": 150
+      }
+    ]
+  }
+}
