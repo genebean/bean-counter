@@ -2,9 +2,9 @@ const {
   name,
   version,
   description
-} = require('../../package.json')
+} = require('../../../package.json')
 
-const ping = (req, res) => {
+exports.ping_get = function(req, res) {
   res.json({
     name,
     description,
@@ -12,5 +12,3 @@ const ping = (req, res) => {
     uptime: process.uptime()
   })
 }
-
-module.exports = ping
