@@ -1,4 +1,5 @@
 require('dotenv').config()
+
 const port = process.env.PORT || 3000
 
 const listEndpoints = require('express-list-endpoints')
@@ -6,7 +7,8 @@ const express = require('express')
 const chalk = require('chalk')
 
 const promPrefix = 'bean_counter_'
-const promBundle = require("express-prom-bundle")
+const promBundle = require('express-prom-bundle')
+
 const metricsMiddleware = promBundle({
   includeMethod: true,
   includePath: true,
@@ -19,6 +21,7 @@ const metricsMiddleware = promBundle({
 
 const swaggerUi = require('swagger-ui-express')
 const YAML = require('yamljs')
+
 const openApiDocument = YAML.load('reference/Bean-Counter.v1.yaml')
 
 const app = express()
@@ -26,7 +29,7 @@ const apiRouter = require('./api/routes')
 
 // register Prometheus metrics collection for all routes
 // ... except those starting with /api-docs
-app.use("/((?!api-docs))*", metricsMiddleware)
+app.use('/((?!api-docs))*', metricsMiddleware)
 
 // parse requests
 app.use(express.urlencoded({ extended: false }))

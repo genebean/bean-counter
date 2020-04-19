@@ -1,9 +1,9 @@
-const { Octokit } = require("@octokit/rest");
-const { throttling } = require("@octokit/plugin-throttling");
+const { Octokit } = require('@octokit/rest');
+const { throttling } = require('@octokit/plugin-throttling');
 
-const ghToken = process.env.GH_TOKEN || ""
-if (ghToken === "") {
-  console.warn("No token for GitHub was found, using unauthenticated access.")
+const ghToken = process.env.GH_TOKEN || ''
+if (ghToken === '') {
+  console.warn('No token for GitHub was found, using unauthenticated access.')
 }
 
 const MyOctokit = Octokit.plugin(throttling)
