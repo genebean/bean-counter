@@ -20,6 +20,8 @@ const octokit = new MyOctokit({
         console.log(`Retrying after ${retryAfter} seconds!`)
         return true
       }
+
+      return false
     },
     onAbuseLimit: (retryAfter, options) => {
       // does not retry, only logs a warning
@@ -28,13 +30,13 @@ const octokit = new MyOctokit({
   }
 })
 
-exports.version_get = function(req, res) {
+exports.version_get = function (req, res) {
   octokit.repos
     .getLatestRelease({
       owner: 'genebean',
       repo: 'PiWeatherRock'
     })
-    .then(({ data, headers, status }) => {
+    .then(({ data }) => { //, headers, status }) => {
       res.json({
         version: data.tag_name,
         published: data.published_at,

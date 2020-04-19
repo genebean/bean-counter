@@ -1,4 +1,4 @@
-exports.error_use = function (err, req, res, next) {
+exports.errorUse = (err, req, res) => {
   const statusCode = err.statusCode || 500;
   res.status(statusCode).json({
     error: {

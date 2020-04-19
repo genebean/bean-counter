@@ -4,7 +4,7 @@ const {
   description
 } = require('../../../package.json')
 
-exports.ping_get = function(req, res) {
+exports.ping_get = (req, res) => {
   res.json({
     name,
     description,
