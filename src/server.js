@@ -1,7 +1,9 @@
 require('dotenv').config()
 const port = process.env.PORT || 3000
 
+const listEndpoints = require('express-list-endpoints')
 const express = require('express')
+const chalk = require('chalk')
 
 const promPrefix = 'bean_counter_'
 const promBundle = require("express-prom-bundle")
@@ -41,4 +43,9 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(openApiDocument))
 // listen on port 3000 by default
 app.listen(port, () => {
   console.log(`Server is listening on port ${port}`)
+  console.log('================================')
+  console.log('Currently Serving Endpoints:')
+  listEndpoints(app).forEach((ep) => {
+    console.log(`path: '${chalk.green(ep.path)}'\nmethods: ${chalk.green(ep.methods)}\n`)
+  })
 })

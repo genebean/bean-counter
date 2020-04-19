@@ -1,7 +1,5 @@
 const chai = require('chai')
 const ping = require('../src/api/ping.js')
-// import httpMocks from 'node-mocks-http';
-// import bodybuilder, { Bodybuilder } from 'bodybuilder';
 
 describe('Ping unit test', () => {
     let returnData = {}
