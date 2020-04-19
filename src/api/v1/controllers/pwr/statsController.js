@@ -1,4 +1,4 @@
-const statsGet = (req, res) => {
+exports.stats_get = function(req, res) {
   console.log('Stub data returned from /api/v1/pwr/stats')
   res.json({
     "devices": 2,
@@ -19,12 +19,7 @@ const statsGet = (req, res) => {
   })
 }
 
-const statsPost = (req, res) => {
+exports.stats_post = function(req, res) {
   console.log(`Data posted to /api/v1/pwr/stats : ${JSON.stringify(req.body)}`)
   res.send('Should handle the submission of stats')
-}
-
-module.exports = {
-  statsGet,
-  statsPost
 }

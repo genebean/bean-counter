@@ -28,7 +28,7 @@ const octokit = new MyOctokit({
   }
 })
 
-const versionGet = (req, res) => {
+exports.version_get = function(req, res) {
   octokit.repos
     .getLatestRelease({
       owner: 'genebean',
@@ -43,8 +43,4 @@ const versionGet = (req, res) => {
         release_url: data.html_url
       })
     })
-}
-
-module.exports = {
-  versionGet
 }
