@@ -6,7 +6,7 @@ const pingController = require('../controllers/pingController')
 
 const v1PwrRouter = require('../v1/routes/pwr')
 
-router.get('/ping', validator.validate('get', '/api/ping'), pingController.ping_get)
+router.get('/ping', validator.validate('get', '/api/ping'), pingController.pingGet)
 
 router.use('/v1/pwr', v1PwrRouter)
 

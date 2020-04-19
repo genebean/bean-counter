@@ -1,4 +1,4 @@
-exports.stats_get = (req, res) => {
+exports.statsGet = (req, res) => {
   console.log('Stub data returned from /api/v1/pwr/stats')
   res.json({
     'devices': 2,
@@ -19,7 +19,7 @@ exports.stats_get = (req, res) => {
   })
 }
 
-exports.stats_post = (req, res) => {
+exports.statsPost = (req, res) => {
   console.log(`Data posted to /api/v1/pwr/stats : ${JSON.stringify(req.body)}`)
   res.send('Should handle the submission of stats')
 }

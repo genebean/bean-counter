@@ -30,7 +30,7 @@ const octokit = new MyOctokit({
   }
 })
 
-exports.version_get = (req, res) => {
+exports.versionGet = (req, res) => {
   octokit.repos
     .getLatestRelease({
       owner: 'genebean',

@@ -6,12 +6,12 @@ const statsController = require('../controllers/pwr/statsController')
 const versionController = require('../controllers/pwr/versionController')
 
 router.route('/stats')
-  .get(validator.validate('get', '/api/v1/pwr/stats'), statsController.stats_get)
-  .post(validator.validate('post', '/api/v1/pwr/stats'), statsController.stats_post)
+  .get(validator.validate('get', '/api/v1/pwr/stats'), statsController.statsGet)
+  .post(validator.validate('post', '/api/v1/pwr/stats'), statsController.statsPost)
 
 router.route('/version')
-  .get(validator.validate('get', '/api/v1/pwr/version'), versionController.version_get)
+  .get(validator.validate('get', '/api/v1/pwr/version'), versionController.versionGet)
 
-router.use(errorController.error_use)
+router.use(errorController.errorUse)
 
 module.exports = router
