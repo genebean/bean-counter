@@ -1,7 +1,7 @@
 const chai = require('chai')
-const ping = require('../src/api/ping.js')
+const ping = require('../src/api/controllers/pingController.js')
 
-describe('Ping unit test', () => {
+describe('pingController unit test', () => {
     let returnData = {}
     beforeEach('', () => {
         // do stuff before each test
@@ -12,10 +12,10 @@ describe('Ping unit test', () => {
                 returnData = data
             }
         }
-        ping(req, res)
+        ping.pingGet(req, res)
     })
 
-    describe('ping function', () => {
+    describe('pingGet function', () => {
 
         it('returns a valid name', () => {
             chai.expect(returnData).to.have.property('name')
