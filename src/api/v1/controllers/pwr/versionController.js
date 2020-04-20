@@ -1,9 +1,9 @@
-const { Octokit } = require("@octokit/rest");
-const { throttling } = require("@octokit/plugin-throttling");
+const { Octokit } = require('@octokit/rest');
+const { throttling } = require('@octokit/plugin-throttling');
 
-const ghToken = process.env.GH_TOKEN || ""
-if (ghToken === "") {
-  console.warn("No token for GitHub was found, using unauthenticated access.")
+const ghToken = process.env.GH_TOKEN || ''
+if (ghToken === '') {
+  console.warn('No token for GitHub was found, using unauthenticated access.')
 }
 
 const MyOctokit = Octokit.plugin(throttling)
@@ -20,6 +20,8 @@ const octokit = new MyOctokit({
         console.log(`Retrying after ${retryAfter} seconds!`)
         return true
       }
+
+      return false
     },
     onAbuseLimit: (retryAfter, options) => {
       // does not retry, only logs a warning
@@ -28,13 +30,13 @@ const octokit = new MyOctokit({
   }
 })
 
-exports.version_get = function(req, res) {
+exports.versionGet = (req, res) => {
   octokit.repos
     .getLatestRelease({
       owner: 'genebean',
       repo: 'PiWeatherRock'
     })
-    .then(({ data, headers, status }) => {
+    .then(({ data }) => { // , headers, status }) => {
       res.json({
         version: data.tag_name,
         published: data.published_at,
