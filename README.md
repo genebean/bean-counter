@@ -1,5 +1,11 @@
 # Bean Counter
 
+![GitHub package.json version](https://img.shields.io/github/package-json/v/genebean/bean-counter)
+[![Dependabot Status](https://api.dependabot.com/badges/status?host=github&repo=genebean/bean-counter)](https://dependabot.com)
+![Snyk Vulnerabilities for GitHub Repo](https://img.shields.io/snyk/vulnerabilities/github/genebean/bean-counter)
+[![Build Status](https://travis-ci.com/genebean/bean-counter.svg?branch=master)](https://travis-ci.com/genebean/bean-counter)
+![GitHub](https://img.shields.io/github/license/genebean/bean-counter)
+
 ## Dev
 
 - `npm install`
