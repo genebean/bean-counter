@@ -21,7 +21,7 @@
     }
   },
   "dependencies": {
-    "@octokit/plugin-throttling": "^3.2.0",
+    "@octokit/plugin-throttling": "^3.2.2",
     "@octokit/rest": "^17.6.0",
     "body-parser": "^1.18.3",
     "chalk": "^4.0.0",
