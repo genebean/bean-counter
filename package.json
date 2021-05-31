@@ -22,7 +22,7 @@
   },
   "dependencies": {
     "@octokit/plugin-throttling": "^3.2.0",
-    "@octokit/rest": "^17.6.0",
+    "@octokit/rest": "^18.5.5",
     "body-parser": "^1.18.3",
     "chalk": "^4.0.0",
     "dotenv": "^8.2.0",
